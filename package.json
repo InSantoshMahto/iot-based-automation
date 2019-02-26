@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/InSantoshMahto/IoT-Based-Automation#readme",
   "dependencies": {
-    "johnny-five": "^1.0.0",
+    "johnny-five": "^1.0.0"
+  },
+  "devDependencies": {
     "nodemon": "^1.18.10"
   }
 }

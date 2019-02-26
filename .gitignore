@@ -62,5 +62,3 @@ typings/
 
 # custom file 
 .history
-jspm_packages
-yarn.lock
