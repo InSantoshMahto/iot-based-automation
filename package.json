@@ -1,0 +1,30 @@
+{
+  "name": "iot-based-automation",
+  "version": "1.0.0",
+  "description": "iot base automation by onsi",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InSantoshMahto/IoT-Based-Automation.git"
+  },
+  "keywords": [
+    "insantoshmahto",
+    "onsi",
+    "onsiindia",
+    "iot",
+    "iotonsi"
+  ],
+  "author": "insantoshmahto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/InSantoshMahto/IoT-Based-Automation/issues"
+  },
+  "homepage": "https://github.com/InSantoshMahto/IoT-Based-Automation#readme",
+  "dependencies": {
+    "johnny-five": "^1.0.0",
+    "nodemon": "^1.18.10"
+  }
+}
