@@ -63,3 +63,4 @@ typings/
 # custom file 
 .history
 .idea
+.vscode
