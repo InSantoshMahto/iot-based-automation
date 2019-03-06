@@ -10,7 +10,6 @@ const app = express();
 
 const PORT = process.env.PORT || 80;
 
-
 /**
  * middleware
  */
@@ -40,5 +39,5 @@ app.use('/', root);
 
 // listen port
 app.listen(PORT, ()=>{
-   console.log(`Server is listening on port: ${PORT}`);
+   console.log(`Server is listening on port: ${PORT} :) cool`);
 });

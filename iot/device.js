@@ -1,18 +1,14 @@
-const five = require('johnny-five');
+const Gpio = require('onoff').Gpio;
 
 let device = {};
 
-device.gpioOut = (pin, (err, ststus)=>{
-    // TOD: five task
-    let board = new five.Board({
-        io: new Raspi()
+device.gpioOut = (pin, set, callback) =>{
+    const led = new Gpio(pin, 'out');
+    led.write(set, (err)=>{
+        if (err) throw err;
+        console.log('object');
     });
+    return callback(null, true);
+}
 
-    board.on("ready", function () {
-        let led = new five.Led("P1-13");
-        led.blink();
-    });
-})
-
-module.exports = device;
-
+module.exports = device;o
