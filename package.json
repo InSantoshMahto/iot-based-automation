@@ -4,7 +4,8 @@
   "description": "iot base automation by onsi",
   "main": "index.js",
   "scripts": {
-    "test": "test.js"
+    "start": "nodemon index.js",
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,11 @@
   },
   "homepage": "https://github.com/InSantoshMahto/IoT-Based-Automation#readme",
   "dependencies": {
-    "johnny-five": "^1.0.0"
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "johnny-five": "^1.0.0",
+    "morgan": "^1.9.1",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
