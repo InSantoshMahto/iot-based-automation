@@ -36,6 +36,7 @@ routes.all('/*', (req, res) => {
     console.log(`incoming data are:\t${req}`);
     res.status(404).json({
         status: {
+            type: 'error',
             code: 404,
             msg: 'file not found'
         },
