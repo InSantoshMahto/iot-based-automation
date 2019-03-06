@@ -16,3 +16,4 @@ device.gpioOut = (pin, (err, ststus)=>{
 
 module.exports = device;
 
+ 
