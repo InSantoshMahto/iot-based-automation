@@ -19,12 +19,19 @@ routes.use((req, res, next) => {
 // dashboard
 routes.get('/', (req, res) => {
     console.log(`${url}`);
-    res.send(url);
+    res.send("<h1 style='text-align:center;'><a style='text-decoration: none;' href='https://github.com/insantoshmahto/iot-based-automation' target='_blank'>InSantoshMahto</a></h1>");
 });
 
 // ping
 routes.get('/ping', (req, res) => {
-    res.status(200).json({});
+    res.status(200).json({
+        status: {
+            type: 'success',
+            code: 200,
+            msg: 'ok'
+        },
+        msg: 'rocks'
+    });
 });
 
 routes.post('/action/:deviceName', (req, res) => {
@@ -38,9 +45,9 @@ routes.all('/*', (req, res) => {
         status: {
             type: 'error',
             code: 404,
-            msg: 'file not found'
+            msg: 'not found'
         },
-        msg: 'try again'
+        msg: 'you are trying to access the file tha is not present. make sure you are asking for right file and try again.'
     });
 });
 
