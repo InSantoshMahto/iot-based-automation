@@ -2,7 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const favicon = require('serve-favicon');
 const socketIO = require('socket.io-client');
-const io = socketIO('http://192.168.1.23');
+const io = socketIO('http://192.168.43.160');
 
 const cors = require('cors');
 const path = require('path');
