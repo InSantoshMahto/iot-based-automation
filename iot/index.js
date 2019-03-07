@@ -61,7 +61,7 @@ iot.action.device = (device_key, deviceType, deviceName, deviceAction, callback)
         return callback(false, `access is denied due to invalid credentials.`);
     } else {
         iot.formate(device_key, deviceType, deviceName, deviceAction, (deviceType, deviceName, deviceAction, clientMsg) => {
-            if (deviceName || deviceAction || deviceType) {
+            if (deviceName == 'other' || deviceAction == 'other' || deviceType == 'other') {
                 // error response
                 return callback(false, clientMsg)
             } else {
