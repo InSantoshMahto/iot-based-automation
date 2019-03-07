@@ -21,51 +21,37 @@ iot.action = (req, res) => {
             msg: 'access is denied due to invalid credentials.'
         });
     } else {
+
         // collecting the data
         let deviceName = req.params.deviceName;
         let deviceAction = req.body.deviceAction;
         let deviceType = req.body.deviceType;
+        iot.formate(deviceType, deviceName, deviceAction, (deviceType, deviceName, deviceAction, clientMsg) => {
 
-        // formating the data
-        deviceName = typeof (deviceName) != 'undefined' && deviceName == 'deviceOne' || deviceName == 'deviceTwo' ? deviceName == 'deviceOne' ? 21 : 20 : 'other';
-        deviceType = typeof (deviceType) != 'undefined' && deviceType == 'activeHigh' || deviceType == 'activeLow' ? deviceType : 'other';
-
-        // setting the IO value according to device type.
-        if (deviceType == 'activeHigh') {
-            deviceAction = typeof (deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on' ? 1 : 0 : 'other';
-        } else {
-            deviceAction = typeof (deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on' ? 0 : 1 : 'other';
-        }
-
-        // dynamic msg according to user data.
-        let clientMsg = deviceType == 'activeHigh' || deviceType == 'activeLow' ? (deviceType == 'activeHigh' && deviceAction == 1) || (deviceType == 'activeLow' && deviceAction == 0) ? 'device is tern on' : 'device is tern off' : 'try again';
-
-        // debugging
-        console.log(`deviceKey: ${device_key}\tdeviceType: ${deviceType}\tdeviceName: ${deviceName}\tdeviceAction: ${deviceAction}`);
-
-        if (deviceName == 'other' || deviceAction == 'other' || deviceType == 'other') {
-            // error response
-            res.status(400).send({
-                status: {
-                    type: 'error',
-                    code: 400,
-                    msg: 'Bad Request'
-                },
-                msg: clientMsg
-            });
-        } else {
-            device.gpioWrite(deviceName, deviceAction, (err, status) => {
-                if (err) throw err;
-                res.status(200).send({
+            if (deviceName || deviceAction || deviceType) {
+                // error response
+                res.status(400).send({
                     status: {
-                        type: 'success',
-                        code: 200,
-                        msg: 'Ok'
+                        type: 'error',
+                        code: 400,
+                        msg: 'Bad Request'
                     },
                     msg: clientMsg
                 });
-            });
-        }
+            } else {
+                device.gpioWrite(deviceName, deviceAction, (err, status) => {
+                    if (err) throw err;
+                    res.status(200).send({
+                        status: {
+                            type: 'success',
+                            code: 200,
+                            msg: 'Ok'
+                        },
+                        msg: clientMsg
+                    });
+                });
+            }
+        })
     }
 }
 
