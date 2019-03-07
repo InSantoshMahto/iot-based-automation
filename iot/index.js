@@ -57,15 +57,18 @@ iot.action = (req, res) => {
 
 // io action
 iot.action.device = (device_key, deviceType, deviceName, deviceAction, callback) => {
+    device_key = typeof (device_key) != 'undefined' ? device_key : false;
     if (!device_key || device_key != AUTH_KEY) {
+        console.log('tested');
         return callback(false, `access is denied due to invalid credentials.`);
     } else {
         iot.formate(device_key, deviceType, deviceName, deviceAction, (deviceType, deviceName, deviceAction, clientMsg) => {
             if (deviceName == 'other' || deviceAction == 'other' || deviceType == 'other') {
                 // error response
+                console.log(error);
                 return callback(false, clientMsg)
             } else {
-
+                console.log(working);
                 device.gpioWrite(deviceName, deviceAction, (err, status) => {
                     if (err) throw err;
                     return callback(false, clientMsg)
