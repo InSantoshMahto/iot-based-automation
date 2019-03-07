@@ -57,7 +57,10 @@ iot.action = (req, res) => {
 
 // io action
 iot.action.device = (device_key, deviceType, deviceName, deviceAction, callback) => {
+
     device_key = typeof (device_key) != 'undefined' ? device_key : false;
+    console.log(device_key);
+    
     if (!device_key || device_key != AUTH_KEY) {
         console.log('tested');
         return callback(false, `access is denied due to invalid credentials.`);
