@@ -2,7 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const favicon = require('serve-favicon');
 const socketIO = require('socket.io-client');
-const io = socketIO('http://192.168.43.111');
+const io = socketIO('https://iotserver.onsi.in');
 const cors = require('cors');
 const path = require('path');
 
