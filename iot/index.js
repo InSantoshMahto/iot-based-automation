@@ -47,4 +47,37 @@ iot.action = (req, res) => {
     }
 }
 
+iot.action.device = (device_key, deviceType, deviceName, deviceAction, callback)=>{
+    if (!device_key || device_key != AUTH_KEY) {
+       return callback(false, `access is denied due to invalid credentials.`);
+    } else {
+                    // formating the data
+        deviceName = typeof(deviceName) != 'undefined' && deviceName == 'deviceOne' || deviceName == 'deviceTwo' ? deviceName == 'deviceOne' ? 21 : 20 : false;
+        deviceType = typeof(deviceType) != 'undefined' && deviceType == 'activeHigh' || deviceType == 'activeLow' ? deviceType : 'other';
+        
+        // setting the IO value according to device type.
+        if (deviceType == 'activeHigh') {
+            deviceAction = typeof(deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on'? 1 : 0 : false;
+        } else {
+            deviceAction = typeof(deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on'? 0 : 1 : false;
+        } 
+    
+    // dynamic msg according to user data.
+        let clientMsg = deviceType == 'activeHigh' ||  deviceType == 'activeLow' ? (deviceType == 'activeHigh' && deviceAction == 1 ) || (deviceType == 'activeLow' && deviceAction == 0) ? 'device is tern on' : 'device is tern off' : 'try again';
+        // debugging
+        console.log(`deviceKey: ${device_key}\tdeviceType: ${deviceType}\tdeviceName: ${deviceName}\tdeviceAction: ${deviceAction}`);
+
+        if (deviceName || deviceAction || deviceType ) {
+            // error response
+            return callback(false, clientMsg)
+        } else {
+
+     device.gpioWrite(deviceName, deviceAction,(err, status)=>{
+                if (err) throw err;
+                return callback(false, clientMsg)
+            });
+        }   
+    }
+}
+
 module.exports = iot;

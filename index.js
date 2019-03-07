@@ -1,10 +1,14 @@
 const express = require('express');
 const logger = require('morgan');
 const favicon = require('serve-favicon');
+const socketIO = require('socket.io-client');
+const io = socketIO('http://192.168.1.23');
+
 const cors = require('cors');
 const path = require('path');
 
 let root = require('./routes');
+let socket = require('./socket');
 
 const app = express();
 
@@ -39,5 +43,11 @@ app.use('/', root);
 
 // listen port
 app.listen(PORT, ()=>{
-   console.log(`Server is listening on port: ${PORT} :) cool`);
+   console.log(`Server is listening on port: ${PORT}`);
+
+   // socket
+   socket.init(io, (err)=>{
+        if (err) throw err;
+        console.log(`socket started.`);
+   })
 });
