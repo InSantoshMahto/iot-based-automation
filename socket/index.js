@@ -27,6 +27,6 @@ socket.init = (io, callback)=>{
     });
     
     return callback(false);
-}
+} 
 
 module.exports = socket;
