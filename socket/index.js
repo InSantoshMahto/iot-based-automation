@@ -13,9 +13,10 @@ socket.init = (io, callback)=>{
         // TODO: action task
         let tested = JSON.stringify(data);
         console.log(`data: ${tested}`);
-        console.log(`io action`);
+
         iot.action.device(data.device_key, data.deviceType, data.deviceName, data.deviceAction, (err, clientMsg)=>{
             if (err) throw err;
+            console.log(`msg emited`);
             io.emit('actionStatus', clientMsg)
         });
     });
