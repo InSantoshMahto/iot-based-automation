@@ -20,7 +20,7 @@ iot.action = (req, res) => {
             },
             msg: 'access is denied due to invalid credentials.'
         });
-    } else {
+    } else { 
 
         // collecting the data
         let deviceName = req.params.deviceName;
@@ -57,24 +57,39 @@ iot.action = (req, res) => {
 
 // io action
 iot.action.device = (device_key, deviceType, deviceName, deviceAction, callback) => {
-
     device_key = typeof (device_key) != 'undefined' ? device_key : false;
-    console.log(device_key);
-    
     if (!device_key || device_key != AUTH_KEY) {
-        console.log('tested');
-        return callback(false, `access is denied due to invalid credentials.`);
+        return callback(false, {
+            status: {
+                type: 'error',
+                code: 401,
+                msg: 'unauthorized'
+            },
+            msg: 'access is denied due to invalid credentials.'
+        });
     } else {
         iot.formate(device_key, deviceType, deviceName, deviceAction, (deviceType, deviceName, deviceAction, clientMsg) => {
             if (deviceName == 'other' || deviceAction == 'other' || deviceType == 'other') {
                 // error response
-                console.log(error);
-                return callback(false, clientMsg)
+                return callback(false, {
+                    status: {
+                        type: 'error',
+                        code: 400,
+                        msg: 'Bad Request'
+                    },
+                    msg: clientMsg
+                })
             } else {
-                console.log(working);
                 device.gpioWrite(deviceName, deviceAction, (err, status) => {
                     if (err) throw err;
-                    return callback(false, clientMsg)
+                    return callback(false, {
+                        status: {
+                            type: 'success',
+                            code: 200,
+                            msg: 'Ok'
+                        },
+                        msg: clientMsg
+                    })
                 });
             }
         })
