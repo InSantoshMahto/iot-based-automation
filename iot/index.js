@@ -26,7 +26,7 @@ iot.action = (req, res) => {
         let deviceName = req.params.deviceName;
         let deviceAction = req.body.deviceAction;
         let deviceType = req.body.deviceType;
-        iot.formate(deviceType, deviceName, deviceAction, (deviceType, deviceName, deviceAction, clientMsg) => {
+        iot.formate(device_key, deviceType, deviceName, deviceAction, (deviceType, deviceName, deviceAction, clientMsg) => {
 
             if (deviceName || deviceAction || deviceType) {
                 // error response
@@ -60,7 +60,7 @@ iot.action.device = (device_key, deviceType, deviceName, deviceAction, callback)
     if (!device_key || device_key != AUTH_KEY) {
         return callback(false, `access is denied due to invalid credentials.`);
     } else {
-        iot.formate(deviceType, deviceName, deviceAction, (deviceType, deviceName, deviceAction, clientMsg) => {
+        iot.formate(device_key, deviceType, deviceName, deviceAction, (deviceType, deviceName, deviceAction, clientMsg) => {
             if (deviceName || deviceAction || deviceType) {
                 // error response
                 return callback(false, clientMsg)
@@ -76,7 +76,7 @@ iot.action.device = (device_key, deviceType, deviceName, deviceAction, callback)
 }
 
 // formate
-iot.formate = (deviceType, deviceName, deviceAction, callback) => {
+iot.formate = (device_key, deviceType, deviceName, deviceAction, callback) => {
     // formating the data
     deviceName = typeof (deviceName) != 'undefined' && deviceName == 'deviceOne' || deviceName == 'deviceTwo' ? deviceName == 'deviceOne' ? 21 : 20 : false;
     deviceType = typeof (deviceType) != 'undefined' && deviceType == 'activeHigh' || deviceType == 'activeLow' ? deviceType : 'other';
