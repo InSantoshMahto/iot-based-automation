@@ -19,7 +19,7 @@ routes.use((req, res, next) => {
 // dashboard
 routes.get('/', (req, res) => {
     console.log(`${url}`);
-    res.send("<h1 style='text-align:center;'><a style='text-decoration: none;' href='https://github.com/insantoshmahto/iot-based-automation' target='_blank'>InSantoshMahto</a></h1>");
+    res.send("<h1 style='text-align:center;'><a style='text-decoration: none;'o href='https://github.com/insantoshmahto/iot-based-automation' target='_blank'>InSantoshMahto</a></h1>");
 });
 
 // ping
