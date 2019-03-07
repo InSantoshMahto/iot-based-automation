@@ -28,7 +28,7 @@ iot.action = (req, res) => {
         let deviceType = req.body.deviceType;
         iot.formate(device_key, deviceType, deviceName, deviceAction, (deviceType, deviceName, deviceAction, clientMsg) => {
 
-            if (deviceName || deviceAction || deviceType) {
+            if (deviceName == 'other' || deviceAction == 'other' || deviceType == 'other') {
                 // error response
                 res.status(400).send({
                     status: {
@@ -78,14 +78,14 @@ iot.action.device = (device_key, deviceType, deviceName, deviceAction, callback)
 // formate
 iot.formate = (device_key, deviceType, deviceName, deviceAction, callback) => {
     // formating the data
-    deviceName = typeof (deviceName) != 'undefined' && deviceName == 'deviceOne' || deviceName == 'deviceTwo' ? deviceName == 'deviceOne' ? 21 : 20 : true;
+    deviceName = typeof (deviceName) != 'undefined' && deviceName == 'deviceOne' || deviceName == 'deviceTwo' ? deviceName == 'deviceOne' ? 21 : 20 : 'other';
     deviceType = typeof (deviceType) != 'undefined' && deviceType == 'activeHigh' || deviceType == 'activeLow' ? deviceType : 'other';
 
     // setting the IO value according to device type.
     if (deviceType == 'activeHigh') {
-        deviceAction = typeof (deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on' ? 1 : 0 : true;
+        deviceAction = typeof (deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on' ? 1 : 0 : 'other';
     } else {
-        deviceAction = typeof (deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on' ? 0 : 1 : true;
+        deviceAction = typeof (deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on' ? 0 : 1 : 'other';
     }
 
     // dynamic msg according to user data.
