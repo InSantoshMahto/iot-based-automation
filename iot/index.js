@@ -78,14 +78,14 @@ iot.action.device = (device_key, deviceType, deviceName, deviceAction, callback)
 // formate
 iot.formate = (device_key, deviceType, deviceName, deviceAction, callback) => {
     // formating the data
-    deviceName = typeof (deviceName) != 'undefined' && deviceName == 'deviceOne' || deviceName == 'deviceTwo' ? deviceName == 'deviceOne' ? 21 : 20 : false;
+    deviceName = typeof (deviceName) != 'undefined' && deviceName == 'deviceOne' || deviceName == 'deviceTwo' ? deviceName == 'deviceOne' ? 21 : 20 : true;
     deviceType = typeof (deviceType) != 'undefined' && deviceType == 'activeHigh' || deviceType == 'activeLow' ? deviceType : 'other';
 
     // setting the IO value according to device type.
     if (deviceType == 'activeHigh') {
-        deviceAction = typeof (deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on' ? 1 : 0 : false;
+        deviceAction = typeof (deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on' ? 1 : 0 : true;
     } else {
-        deviceAction = typeof (deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on' ? 0 : 1 : false;
+        deviceAction = typeof (deviceAction) != 'undefined' && deviceAction == 'on' || deviceAction == 'off' ? deviceAction == 'on' ? 0 : 1 : true;
     }
 
     // dynamic msg according to user data.
